@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">SocketClient</string>
+    <string name="server_address">http://116.47.109.213:8000%1$s</string>
+</resources>
