@@ -1,5 +1,6 @@
 package com.socketclient.activities.login;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, LoginContract.View{
+    @BindView(R.id.title_edittext)
+    TextView titleEditText;
     @BindView(R.id.result_text_view)
     TextView mResultTextView;
     @BindView(R.id.id_edittext)
@@ -33,6 +36,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     boolean isLoginMode;
     LoginContract.Presenter mPresenter;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +45,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mPresenter = new LoginPresenter();
         mPresenter.setView(this);
         isLoginMode = true;
+        titleEditText.setText(getString(R.string.app_name) + "\n로그인");
     }
 
     @Override
@@ -66,6 +71,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void toggleMode() {
         clearText();
@@ -77,7 +83,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             mLoginButtonContainer.setVisibility(View.GONE);
             mRegistButtonContainer.setVisibility(View.VISIBLE);
-
+            titleEditText.setText(getString(R.string.app_name) + "\n회원가입");
         } else{
             //로그인모드로 변경
             mConfirmPwEditText.setVisibility((View.GONE));
@@ -85,18 +91,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             mLoginButtonContainer.setVisibility(View.VISIBLE);
             mRegistButtonContainer.setVisibility(View.GONE);
+            titleEditText.setText(getString(R.string.app_name) + "\n로그인");
         }
         isLoginMode = !isLoginMode;
     }
 
     @Override
     public void showLoading() {
-
+        setResult("처리중...");
     }
 
     @Override
     public void hideLoading() {
-
+        //setResult("");
     }
 
     @Override

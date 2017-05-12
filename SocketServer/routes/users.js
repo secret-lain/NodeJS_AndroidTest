@@ -3,22 +3,23 @@ var express = require('express');
 var router = express.Router();
 
 
-// /users 하부구조
-/* GET users listing. */
+//아직 안써먹음
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-router.put('/regist', (req, res, next) => {
+//회원가입
+router.post('/', (req, res, next) => {
     console.log('/users/regist reached');
     database.regist(req.body.id, req.body.pw, req.body.email, function(result){
         res.json(result);
     });
 });
 
-router.post('/login', (req, res, next) => {
-    console.log('/users/regist reached');
-    database.userLogin(req.body.id, req.body.pw,function(result){
+//로그인시도
+router.get('/login', (req, res, next) => {
+    console.log('[' + req.query.id + '] user is try to login');
+    database.userLogin(req.query.id, req.query.pw,function(result){
         res.json(result);
     });
 });

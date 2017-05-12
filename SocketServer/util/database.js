@@ -1,10 +1,12 @@
 var AWS = require('aws-sdk');
 var encrypt = require('../util/encrypt');
+var tokenCenter = require('../util/jwtFactory');
 AWS.config.update({
     region: 'us-west-2'
 });
 var dbClient = new AWS.DynamoDB.DocumentClient();
-var userTableName = 'users'
+var userTableName = 'users';
+var userInformationTableName = 'PlayerInformation';
 
 
 //아이디가 있는 지 확인.
@@ -52,6 +54,7 @@ module.exports.userLogin = function (id, pw, callback) {
                 callback({
                     error: false,
                     result: true,
+                    token: tokenCenter.signToken({id : result.data.Item.id})
                 });
             }
             //아이디가 매치되지 않는 경우. 로그인 실패
@@ -72,7 +75,10 @@ module.exports.regist = function (id, pw, email, callback) {
         Item: {
             "id": id,
             "pw": pw,
-            "email": email
+            "email": email,
+            "isFirst": true, // 첫 회원가입 후 유저정보 생성분기를 위함
+            "RegistDay": new Date.now(),
+            "LastConnectDay": new Date.now() // 추후 필요할 수도 있어서 저장
         }
     };
     
@@ -113,4 +119,8 @@ module.exports.regist = function (id, pw, email, callback) {
             }
         }
     });
+}
+
+module.exports.getUserInformation = function (token){
+    
 }
