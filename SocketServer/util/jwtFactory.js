@@ -1,5 +1,6 @@
 var jwt = require('jsonwebtoken');
 var key = "wh0+e_Pr1ncezz";
+var tokenFactory = [];
 
 //payload example = { id : "android" }
 module.exports.signToken = function(payload){
@@ -15,7 +16,9 @@ module.exports.signToken = function(payload){
 module.exports.verify = function(token){
     try{
         var decoded = jwt.verify(token, key);
+        return decoded;
     } catch(err){
         console.log(token + ' occured error : ' + err);
+        return null;
     }    
 }

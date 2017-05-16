@@ -4,9 +4,11 @@ var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var jwt = require('./util/jwtFactory');
 
 var index = require('./routes/index');
-var users = require('./routes/users');
+var auth = require('./routes/auth');
+var main = require('.//routes/main');
 
 var http = require('http');
 
@@ -26,7 +28,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
+app.use('/auth', auth);
+app.use('/main', main);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -46,6 +49,9 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+///////////////////////////////////////////////////////////////////////////
+// 이 아래로는 서버 구동
+///////////////////////////////////////////////////////////////////////////
 var server = http.createServer(app).listen(8000, function(){
     console.log('server started');
 });
