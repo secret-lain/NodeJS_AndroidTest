@@ -9,7 +9,7 @@ import com.socketclient.interfaces.BaseView;
 
 public interface MainContract {
     interface View extends BaseView<MainContract.Presenter> {
-
+        
     }
 
     interface Presenter extends BasePresenter<MainContract.View> {

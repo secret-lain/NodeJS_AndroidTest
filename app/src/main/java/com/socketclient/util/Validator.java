@@ -24,7 +24,7 @@ public class Validator {
         } else return NOT_INPUT;
     }
 
-    public static int isValidID(String id) {
+    public static int isValidAlphabetAndDigit(String id) {
         if (isNotEmpty(id)) {
             Matcher result = Pattern.compile("^[a-zA-Z0-9]+$")
                     .matcher(id);
