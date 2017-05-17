@@ -21,7 +21,6 @@ function connectDB(){
         userInfoSchema = mongoose.Schema({
             _id: 'string',
             password: 'string',
-            nickname: 'string',
             email: 'string',
             createDate : 'string',
             lastConnectDate : 'string'
@@ -76,7 +75,6 @@ module.exports.userLogin = function(id, pw, callback){
                 callback({
                     error: false,
                     result: true,
-                    nickname: data.nickname, //닉네임이 ''이면 첫접속이라는 뜻~
                     token: tokenCenter.signToken({ id : data._id })
                 });
                 

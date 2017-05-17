@@ -16,7 +16,6 @@ public class UserStatusContainer {
     }
 
     private String userId;
-    private String userNickname;
     private String token;
 
     public void setToken(String token){
@@ -25,16 +24,9 @@ public class UserStatusContainer {
     public void setUserId(String userId){
         this.userId = userId;
     }
-    public void setUserNickname(String userNickname){
-        this.userNickname = userNickname;
-    }
 
     public String getUserId() {
         return userId;
-    }
-
-    public String getUserNickname() {
-        return userNickname;
     }
 
     public String getToken() {

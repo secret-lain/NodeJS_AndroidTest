@@ -5,7 +5,6 @@ import android.util.Log;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.socketclient.activities.first.FirstActivity;
 import com.socketclient.activities.main.MainActivity;
 import com.socketclient.util.ServerConnector;
 import com.socketclient.util.UserStatusContainer;
@@ -56,14 +55,7 @@ public class LoginPresenter implements LoginContract.Presenter {
 
                                 //최초 접속이라 닉네임이 없는 경우는 이쪽
                                 Intent toNextActivity;
-                                String nickname = response.getString("nickname");
-                                if(nickname == null || nickname.equals("")){
-                                    toNextActivity = new Intent(mView.getContext(), FirstActivity.class);
-                                } else{
-                                    //아닌 경우는 이쪽. 바로 메인으로 간다
-                                    user.setUserNickname(nickname);
-                                    toNextActivity = new Intent(mView.getContext(), MainActivity.class);
-                                }
+                                toNextActivity = new Intent(mView.getContext(), MainActivity.class);
                                 mView.getContext().startActivity(toNextActivity);
                             } else{
                                 //접속은 시도했으나 실패

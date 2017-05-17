@@ -14,8 +14,10 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.textView)
-    TextView textView;
+    @BindView(R.id.user_token_textview)
+    TextView userTokenTextview;
+    @BindView(R.id.user_id_textview)
+    TextView userIdTextView;
 
 
     @Override
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         UserStatusContainer user = UserStatusContainer.getInstance();
 
-        textView.setText("Hello " + user.getUserNickname());
+        userIdTextView.setText("Hello " + user.getUserId());
+        userTokenTextview.setText("Your Token is " + user.getToken());
     }
 }
